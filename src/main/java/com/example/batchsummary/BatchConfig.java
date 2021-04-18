@@ -63,7 +63,7 @@ public class BatchConfig {
     public FlatFileItemWriter<String> writer() throws FileNotFoundException {
         return new FlatFileItemWriterBuilder<String>()
                 .name("greetingWriter")
-                .resource(new FileSystemResource(ResourceUtils.getFile("output2/greetings.txt")))
+                .resource(new FileSystemResource(ResourceUtils.getFile("output/greetings.txt")))
                 .lineAggregator(new PassThroughLineAggregator<>())
                 .build();
     }
