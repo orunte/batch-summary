@@ -1,5 +1,6 @@
 package com.example.batchsummary;
 
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;
@@ -23,7 +24,8 @@ public class BatchSummaryListener extends JobExecutionListenerSupport {
         logger.info("Creating job summary");
         try {
             Configuration freemarkerConfig = new Configuration(Configuration.VERSION_2_3_31);
-            freemarkerConfig.setDirectoryForTemplateLoading(ResourceUtils.getFile("classpath:templates"));
+            ClassTemplateLoader templateLoader = new ClassTemplateLoader(getClass(), "/templates");
+            freemarkerConfig.setTemplateLoader(templateLoader);
             freemarkerConfig.setDefaultEncoding("UTF-8");
             Template template = freemarkerConfig.getTemplate("summary.ftl");
             Map<String, Object> templateData = new HashMap<>();
